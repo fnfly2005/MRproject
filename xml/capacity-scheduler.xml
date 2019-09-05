@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--关于YARN-YARN中的调度-容量调度器配置
+范例4-1 容量调度器的基本配置文件
+root队列被划分为prod和dev两个队列 分别占40%和60% 
+dev队列进一步被划分成eng和science两个容量相等的队列
+dev最大容量为75%，而prod则可能会占用全部集群资源-->
+<configuration>
+	<property>
+		<name>yarn.scheduler.capacity.root.queues</name>
+		<value>prod,dev</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.capacity.dev.queues</name>
+		<value>eng,science</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.capacity.prod.capacity</name>
+		<value>40</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.capacity.dev.capacity</name>
+		<value>60</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.capacity.dev.maximum-capacity</name>
+		<value>75</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.capacity.dev.eng.capacity</name>
+		<value>50</value>
+	</property>
+	<property>
+		<name>yarn.scheduler.capacity.dev.science.capacity</name>
+		<value>50</value>
+	</property>
+</configuration>
