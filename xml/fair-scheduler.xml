@@ -4,13 +4,15 @@
 队列的层次使用嵌套queue元素来定义
 在这个例子中，当集群资源按照40：60的比例分配给prod和dev时，集群分配被认为是公平的
 eng 和science 队列没有指定权重，他们会被平均分配
-需要考虑默认队列和动态创建队列，虽然没有分配全职，但他们仍有值为1的权重-->
+需要考虑默认队列和动态创建队列，虽然没有分配全职，但他们仍有值为1的权重
+
+-->
 <allocations>
-	<defaultQueueSchedulingPolicy>fair</defaultQueueSchedulingPolicy>
+	<defaultQueueSchedulingPolicy>fair</defaultQueueSchedulingPolicy><!--指定队列的默认调度策略-->
 	
 	<queue name="prod">
 		<weight>40</weight>
-		<schedulingPolicy>fifo</schedulingPolicy>
+		<schedulingPolicy>fifo</schedulingPolicy><!-- 可以覆盖队列的默认调度策略 优先级较高-->
 	</queue>
 	
 	<queue name="dev">
@@ -19,7 +21,7 @@ eng 和science 队列没有指定权重，他们会被平均分配
 		<queue name="science" />
 	</queue>
 	
-	<queuePlacementPolicy>
+	<queuePlacementPolicy><!-- 基于规则来确定应用放到哪个队列 会依次尝试以下规则 default是兜底规则 -->
 		<rule name="specified" create="false"/>
 		<rule name="primaryGroup" create="false"/>
 		<rule name="default" queue="dev.eng" />
