@@ -15,22 +15,9 @@ import org.apache.hadoop.io.Writable;
 import org.apache.hadoop.io.WritableComparator;
 import org.apache.hadoop.util.StringUtils;
 import org.junit.Test;
-import org.junit.runner.JUnitCore;
-import org.junit.runner.Result;
-import org.junit.runner.notification.Failure;
 
 
 public class SerializeDemo {
-
-	public static void main(String[] args) throws IOException {
-
-		Result result = JUnitCore.runClasses(SerializeDemo.class);
-		for (Failure failure :result.getFailures()) {
-			System.out.println(failure.toString());
-		}
-		System.out.println(result.wasSuccessful());
-
-	}
 
 	@Test
 	public void writableInterfaceDemo() throws IOException {
