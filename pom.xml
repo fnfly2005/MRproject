@@ -28,6 +28,11 @@
 			<artifactId>hadoop-mapreduce-client-core</artifactId>
 			<version>2.7.7</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.11</version>
+		</dependency>
 	</dependencies>
 	<!-- 将第三方库和自己的程序代码打包到一个jar包中 -->
 	<build>

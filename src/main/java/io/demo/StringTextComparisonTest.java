@@ -51,4 +51,26 @@ public class StringTextComparisonTest {
 		assertEquals(t.charAt(3), 0x6771);
 		assertEquals(t.charAt(6), 0x10400);
 	}
+	
+	@Test
+	public void variabilityDemo() {
+		/*
+		 * Hadoop的I/O操作-序列化-Writable类-Text类型三
+		 * 通过set方法重用Text
+		 */
+		
+		Text t = new Text("hadoop");
+		t.set("pig");
+		assertEquals(t.getLength(), 3);
+		assertEquals(t.getBytes().length, 3);
+		
+		Text t1 = new Text("hadoop");
+		t1.set(new Text("pig"));
+		assertEquals(t1.getLength(), 3);//getLength返回的是有效字符
+		assertEquals("Byte length not shortened", t1.getBytes().length,6);
+		
+		//Text类并不像String类那样有丰富的字符串，多数情况下需要将Text对象转化成String对象 使用toString()
+		assertEquals(new Text("hadoop").toString(), "hadoop");
+		
+	}
 }
