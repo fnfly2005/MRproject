@@ -7,7 +7,10 @@ import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import org.apache.hadoop.io.BytesWritable;
 import org.apache.hadoop.io.IntWritable;
+import org.apache.hadoop.io.LongWritable;
+import org.apache.hadoop.io.MapWritable;
 import org.apache.hadoop.io.RawComparator;
 import org.apache.hadoop.io.Text;
 import org.apache.hadoop.io.VIntWritable;
@@ -66,6 +69,24 @@ public class SerializeDemo {
 		assertEquals(t.find("o"),3);//finds first o
 		assertEquals(t.find("o",4),4);//finds o from position 4 or later
 		assertEquals(t.find("pig"),-1);//No match
+		
+		//Hadoop的I/O操作-序列化-Writable类-BytesWritable
+		BytesWritable b = new BytesWritable(new byte[] {3,5});
+		byte[] bytes = serialize(b);
+		assertEquals(StringUtils.byteToHexString(bytes), "000000020305");
+		
+		b.setCapacity(11);
+		assertEquals(b.getLength(),2);
+		assertEquals(b.getBytes().length, 11);
+		
+		//Hadoop的I/O操作-序列化-Writable类-Writable集合类
+		
+		MapWritable src = new MapWritable();
+		src.put(new IntWritable(1),new Text("cat"));
+		src.put(new VIntWritable(2), new LongWritable(163));
+		
+		assertEquals((Text) src.get(new IntWritable(1)), new Text("cat"));
+		assertEquals((LongWritable) src.get(new VIntWritable(2)), new LongWritable(163));
 	}
 	
 	public static byte[] serialize(Writable writable) throws IOException {
