@@ -5,6 +5,9 @@ import org.apache.hadoop.io.*;
 
 public class TextPair implements WritableComparable<TextPair> {
 
+	/*
+	 * Hadoop的I/O操作-序列化-实现定制的Writable集合
+	 */
 	private Text first;
 	private Text second;
 	
@@ -77,6 +80,9 @@ public class TextPair implements WritableComparable<TextPair> {
 	}
 
 	public static class Comparator extends WritableComparator{
+		/*
+		 * Hadoop的I/O操作-序列化-实现定制的Writable集合-为提高速度实现一个RawComparator
+		 */
 		private static final Text.Comparator TEXT_COMPARATOR = new Text.Comparator();
 		public Comparator() {
 			super(TextPair.class);
@@ -103,6 +109,40 @@ public class TextPair implements WritableComparable<TextPair> {
 		static {
 			WritableComparator.define(TextPair.class, new Comparator());
 		}
+	}
+	
+	public static class FirstComparator extends WritableComparator {
+		/*
+		 * Hadoop的I/O操作-序列化-实现定制的Writable集合-定制的comparator
+		 */
+		private static final Text.Comparator TEXT_COMPARATOR = new Text.Comparator();
+		public FirstComparator() {
+			// TODO Auto-generated constructor stub
+			super(TextPair.class);
+		}
+		@Override
+		public int compare(byte[] b1, int s1, int l1, byte[] b2, int s2, int l2) {
+			try {
+				int firstL1 =WritableUtils.decodeVIntSize(b1[s1])+ readVInt(b1, s1);
+				int firstL2 =WritableUtils.decodeVIntSize(b2[s2])+ readVInt(b2, s2);
+				return TEXT_COMPARATOR.compare(b1, s1, firstL1, b2, s2, firstL2);
+			} catch (IOException e) {
+				// TODO: handle exception
+				throw new IllegalArgumentException(e);				
+			}
+			
+			
+		}
+		@SuppressWarnings("rawtypes")
+		@Override
+		public int compare(WritableComparable a, WritableComparable b) {
+			if (a instanceof TextPair && b instanceof TextPair) {
+				return ((TextPair) a).first.compareTo(((TextPair) b).first);
+			}
+			return super.compare(a, b);
+		}
+		
+		
 	}
 	
 }
