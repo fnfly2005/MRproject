@@ -33,6 +33,11 @@
 			<artifactId>junit</artifactId>
 			<version>4.11</version>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.mrunit</groupId>
+			<artifactId>mrunit</artifactId>
+			<version>0.8.0-incubating</version>
+		</dependency>
 	</dependencies>
 	<!-- 将第三方库和自己的程序代码打包到一个jar包中 -->
 	<build>
