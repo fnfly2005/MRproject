@@ -25,6 +25,7 @@ public class MaxTemperatureMapperTest {
 			.runTest();
 	}*/
 	
+	
 	@Test
 	public void ignoreMissingTemperatureRecord() throws IOException,InterruptedException {
 			Text value = new Text("0043011990999991950051518004+68750+023550FM-12+0382" + 
