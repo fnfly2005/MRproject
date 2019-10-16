@@ -14,7 +14,7 @@ public class MaxTemperatureMapperTest {
 	/*
 	 * MapReduce应用开发-用MRUnit来写单元测试-关于Mapper
 	 
-	
+	*/
 	@Test
 	public void processesValidRecord() throws IOException,InterruptedException{
 		Text value = new Text("0043011990999991950051518004+68750+023550FM-12+0382" + 
@@ -23,9 +23,9 @@ public class MaxTemperatureMapperTest {
 			.withMapper(new MaxTemperatureMapper())
 			.withInput(new LongWritable(0),value)
 			.runTest();
-	}*/
+	}
 	
-	
+	/*
 	@Test
 	public void ignoreMissingTemperatureRecord() throws IOException,InterruptedException {
 			Text value = new Text("0043011990999991950051518004+68750+023550FM-12+0382" + 
@@ -35,5 +35,7 @@ public class MaxTemperatureMapperTest {
 			.withInput(new LongWritable(0),value)
 			.runTest();
 		}
+		
+	*/
 	}
 
