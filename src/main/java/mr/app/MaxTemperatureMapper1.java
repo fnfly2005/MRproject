@@ -13,7 +13,7 @@ public class MaxTemperatureMapper1 extends Mapper<LongWritable, Text, Text, IntW
  * 范例6-6 通过了MaxTemperatureMapper测试的第一个版本Mapper函数
  */
 	@Override
-	public void map(LongWritable key, Text value, Context context)
+	public void map(LongWritable key, Text value, Context context)//MapContext --The context that is given to the Mapper
 			throws IOException, InterruptedException {
 		
 		String line = value.toString();
