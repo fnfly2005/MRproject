@@ -33,7 +33,9 @@ public class MaxTemperatureMapperTest {
 			.withInput(new LongWritable(0),value) //withInput(K1 key,V1 val) 继承父类MapDriverBase的方法 等同于setInput() 
 			//setInput(K1 key,V1 val) --Sets the input to send to the mapper 
 			//LongWritable(long value) --implements WritableComparable<LongWritable> --A WritableComparable for longs 
-			.withOutput(new Text("1950"),new IntWritable(-11))
+			.withOutput(new Text("1950"),new IntWritable(-11))//withOutput(K2 key,V2 val) 继承父类MapDriverBase的方法 等同于addOutput()
+			//addOutput(K2 key,V2 val) --Adds a (k, v) pair we expect as output
+			//IntWritable(int value) ---A WritableComparable for ints
 			.runTest();//--Runs the test and validates the results --继承父类MapDriverBase的父类TestDriver的方法
 		
 	}
