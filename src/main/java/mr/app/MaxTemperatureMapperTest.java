@@ -40,13 +40,13 @@ public class MaxTemperatureMapperTest {
 		
 	}
 	
-	
+	//缺失值测试
 	@Test
 	public void ignoreMissingTemperatureRecord() throws IOException,InterruptedException {
 			Text value = new Text("0043011990999991950051518004+68750+023550FM-12+0382" + 
 					"99999V0203201N00261220001CN9999999N9+99991+99999999999");
 			new MapDriver<LongWritable,Text,Text,IntWritable>()
-			.withMapper(new MaxTemperatureMapper())
+			.withMapper(new MaxTemperatureMapper())//MaxTemperatureMapper1由于不支持对缺失值的处理，故测试会失败
 			.withInput(new LongWritable(0),value)
 			.runTest();
 		}

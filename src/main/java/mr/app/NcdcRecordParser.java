@@ -4,8 +4,11 @@ import org.apache.hadoop.io.Text;
 
 public class NcdcRecordParser {
 	/*
-	 * 该类解析NCDC格式的气温记录
+	 * MapReduce应用开发-用MRUnit来写单元测试-关于Mapper
+	 * 范例6-7 该类解析NCDC格式的气温记录
 	 * 用于封装解析逻辑
+	 * java String s.charAt()
+	 * java 运算符 &&
 	 */
 	private static final int MISSING_TEMPERATURE = 9999;
 	
@@ -17,7 +20,7 @@ public class NcdcRecordParser {
 		year = record.substring(15, 19);
 		String airTemperatureString;
 		// Remove Leading plus sign as parseInt doesn't like them
-		if (record.charAt(87) == '+') {
+		if (record.charAt(87) == '+') {//char charAt(int index) --Returns the char value at the specified index
 			airTemperatureString = record.substring(88,92);
 		}else {
 			airTemperatureString = record.substring(87,92);
@@ -32,7 +35,8 @@ public class NcdcRecordParser {
 	}
 	
 	public boolean isValidTemperature() {
-		return airTemperature != MISSING_TEMPERATURE && quality.matches("[01459]");
+		//boolean matches(String regex) --Tells whether or not this string matches the given regular expression. 
+		return airTemperature != MISSING_TEMPERATURE && quality.matches("[01459]");//&& 逻辑与 当且仅当两个都为真
 	}
 	
 	public String getYear() {
