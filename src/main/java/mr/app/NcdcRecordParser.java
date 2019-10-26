@@ -6,7 +6,7 @@ public class NcdcRecordParser {
 	/*
 	 * MapReduce应用开发-用MRUnit来写单元测试-关于Mapper
 	 * 范例6-7 该类解析NCDC格式的气温记录
-	 * 用于封装解析逻辑
+	 * 用于封装解析逻辑 相似作业的mapper不需要重写代码，并且可以直接针对解析类编写单元测试
 	 * java String s.charAt()
 	 * java 运算符 &&
 	 */

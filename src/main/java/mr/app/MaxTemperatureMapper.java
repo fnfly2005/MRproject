@@ -8,6 +8,10 @@ import org.apache.hadoop.io.Text;
 import org.apache.hadoop.mapreduce.Mapper;
 
 public class MaxTemperatureMapper extends Mapper<LongWritable, Text, Text, IntWritable>{
+	/*
+	 * MapReduce应用开发-用MRUnit来写单元测试-关于Mapper
+	 * 范例 6-8 这个mapper 使用utility类来解析记录
+	 */
 	
 	private NcdcRecordParser Parser = new NcdcRecordParser();
 
