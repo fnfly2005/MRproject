@@ -50,13 +50,25 @@ public class MaxTemperatureMapperTest {
 			.withInput(new LongWritable(0),value)
 			.runTest();
 		}
-		
+	
+	/*
+	 * MapReduce应用开发-用MRUnit来写单元测试-关于Reducer
+	 * 测试reducer 找出指定键最大值的功能
+	 */
 	@Test
 	public void returnsMaximumIntegerInValues() throws IOException,InterruptedException {
 		new ReduceDriver<Text,IntWritable,Text,IntWritable>()
 			.withReducer(new MaxTemperatureReducer())
+			//withReducer(Reducer<K1,V1,K2,V2> r) --等同于setReducer
+			//setReducer(Reducer<K1,V1,K2,V2> r) --Sets the reducer object to use for this test  
 			.withInput(new Text("1950"),Arrays.asList(new IntWritable(10),new IntWritable(5)))
+			//withInput(K1 key, List<V1> values) 继承父类ReduceDriverBase的方法 等同于setInput
+			//setInput(K1 key,List<V1> values) 继承父类ReduceDriverBase的方法 Sets the input to send to the reducer
+			//static <T> List<T> asList(T... a) 返回由指定数组支持的固定大小列表
 			.withOutput(new Text("1950"), new IntWritable(10))
+			//继承了父类TestDriver
+			//withOutput(K2 key,V2 val) --等同于addOutput
+			//addOutput(K2 key,V2 val) --Adds a (k, v) pair we expect as output
 			.runTest();
 	}
 	}
