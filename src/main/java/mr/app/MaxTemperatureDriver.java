@@ -33,11 +33,11 @@ public class MaxTemperatureDriver extends Configured implements Tool {
 		}
 		
 		Configuration conf = new Configuration();//Configuration() Provides access to configuration parameters
-		Job job = Job.getInstance(conf,"Max temperature");
-		job.setJarByClass(getClass());
+		Job job = Job.getInstance(conf,"Max temperature");//static Job getInstance(Configuration conf,String jobName) 创建作业并返回一个job实例 
+		job.setJarByClass(getClass());//通过查找给定类的来源来设置jar --Set the Jar by finding where a given class came from
 		
-		FileInputFormat.addInputPath(job, new Path(args[0]));
-		FileOutputFormat.setOutputPath(job, new Path(args[1]));
+		FileInputFormat.addInputPath(job, new Path(args[0]));//void addInputPath(Job job,Path path) --Add a Path to the list of inputs for the map-reduce job.
+		FileOutputFormat.setOutputPath(job, new Path(args[1]));//void setOutputPath(Job job,Path outputDir) --Set the Path of the output directory for the map-reduce job
 		
 		job.setMapperClass(MaxTemperatureMapper.class);
 		job.setCombinerClass(MaxTemperatureReducer.class);
