@@ -39,18 +39,18 @@ public class MaxTemperatureDriver extends Configured implements Tool {
 		FileInputFormat.addInputPath(job, new Path(args[0]));//void addInputPath(Job job,Path path) --Add a Path to the list of inputs for the map-reduce job.
 		FileOutputFormat.setOutputPath(job, new Path(args[1]));//void setOutputPath(Job job,Path outputDir) --Set the Path of the output directory for the map-reduce job
 		
-		job.setMapperClass(MaxTemperatureMapper.class);
-		job.setCombinerClass(MaxTemperatureReducer.class);
-		job.setReducerClass(MaxTemperatureReducer.class);
+		job.setMapperClass(MaxTemperatureMapper.class);//void setMapperClass(Class<? extends Mapper> cls) --Set the Mapper for the job
+		job.setCombinerClass(MaxTemperatureReducer.class);//void setCombinerClass(Class<? extends Reducer> cls) --Set the combiner class for the job
+		job.setReducerClass(MaxTemperatureReducer.class);//setReducerClass(Class<? extends Reducer> cls) --Set the Reducer for the job
 		
-		job.setOutputKeyClass(Text.class);
-		job.setOutputValueClass(IntWritable.class);
+		job.setOutputKeyClass(Text.class);//void setOutputKeyClass(Class<?> theClass) --Set the key class for the job output data
+		job.setOutputValueClass(IntWritable.class);//setOutputValueClass(Class<?> theClass) --Set the value class for job outputs
 		
-		return job.waitForCompletion(true) ? 0:1;
+		return job.waitForCompletion(true) ? 0:1;//boolean waitForCompletion(boolean verbose) --Submit the job to the cluster and wait for it to finish
 	}
 
 	public static void main(String[] args) throws Exception {
-		int exitCode = ToolRunner.run(new MaxTemperatureDriver(),args);
+		int exitCode = ToolRunner.run(new MaxTemperatureDriver(),args);//int run(Tool tool,String[] args) --Runs the Tool with its Configuration
 		System.exit(exitCode);
 	}
 
