@@ -1,7 +1,10 @@
 package mr.app;
 
+import static org.junit.Assert.assertEquals;
+
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.conf.Configured;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.io.IntWritable;
 import org.apache.hadoop.io.Text;
@@ -10,6 +13,7 @@ import org.apache.hadoop.mapreduce.lib.input.FileInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.util.Tool;
 import org.apache.hadoop.util.ToolRunner;
+import org.junit.Test;
 
 public class MaxTemperatureDriver extends Configured implements Tool {
 	//Configured 用于可以使用Configuration 的基类 
@@ -53,5 +57,32 @@ public class MaxTemperatureDriver extends Configured implements Tool {
 		int exitCode = ToolRunner.run(new MaxTemperatureDriver(),args);//int run(Tool tool,String[] args) --Runs the Tool with its Configuration
 		System.exit(exitCode);
 	}
+	
+	@Test
+	public void test() throws Exception {
+		/*
+		 * hadoop hadoop.conf Configuration() 
+		 * hadoop hadoop.conf set(String name,String value)
+		 * haddop hadoop.conf setInt(String name,int value)
+		 */
+		Configuration conf = new Configuration();
+		conf.set("fs.defaultFS", "file:///");
+		conf.set("mapreduce.framework.name", "local");
+		conf.setInt("mapreduce.task.io.sort.mb", 1);
+		
+		Path input = new Path("/Users/fannian/MRproject/input/ncdc/1901");
+		Path output = new Path("/Users/fannian/MRproject/output");
+		
+		FileSystem fs = FileSystem.getLocal(conf);
+		fs.delete(output,true);
+		
+		MaxTemperatureDriver driver = new MaxTemperatureDriver();
+		driver.setConf(conf);
+		
+		int exitCode = driver.run(new String[] {
+			input.toString(),output.toString() });
+		assertEquals(0, exitCode);
+		//checkOutput(conf,output);
+		}
 
 }
