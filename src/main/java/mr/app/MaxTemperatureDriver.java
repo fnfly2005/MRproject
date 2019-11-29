@@ -64,6 +64,11 @@ public class MaxTemperatureDriver extends Configured implements Tool {
 		 * hadoop hadoop.conf Configuration() 
 		 * hadoop hadoop.conf set(String name,String value)
 		 * haddop hadoop.conf setInt(String name,int value)
+		 * hadoop hadoop.fs Path(string)
+		 * hadoop hadoop.fs fs.getLocal(Configuration conf)
+		 * hadoop hadoop.fs fs.delete(Path f,boolean recursive)
+		 * hadoop hadoop.conf c.setConf(Configuration conf) 
+		 * junit junit.Assert assertEquals(object,object) 
 		 */
 		Configuration conf = new Configuration();
 		conf.set("fs.defaultFS", "file:///");
