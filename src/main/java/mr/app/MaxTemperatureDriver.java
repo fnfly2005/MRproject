@@ -23,7 +23,7 @@ public class MaxTemperatureDriver extends Configured implements Tool {
 	 * 范例6-10 查找最高气温
 	 */
 
-	@Override
+
 	public int run(String[] args) throws Exception {
 		//Tool.run(String[] args) Execute the command with the given arguments.
 		if(args.length != 2) {

@@ -26,7 +26,7 @@ public class FileCopyWithProgress {
 		FileSystem fs = FileSystem.get(uri,conf);
 		Progressable pge = new Progressable() {
 			
-			@Override
+			
 			public void progress() {
 				System.out.print(".");
 			}
