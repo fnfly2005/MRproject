@@ -37,19 +37,19 @@ public class TextPair implements WritableComparable<TextPair> {
 		return second;
 	}
 
-	@Override
+	
 	public void write(DataOutput out) throws IOException {
 		first.write(out);
 		second.write(out);
 	}
 
-	@Override
+	
 	public void readFields(DataInput in) throws IOException {
 		first.readFields(in);
 		second.readFields(in);
 	}
 
-	@Override
+	
 	public int compareTo(TextPair tp) {
 		int cmp = first.compareTo(tp.first);
 		
