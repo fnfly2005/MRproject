@@ -13,6 +13,10 @@ public class MaxTemperatureMapper extends Mapper<LongWritable, Text, Text, IntWr
 	 * 范例 6-8 这个mapper 使用utility类来解析记录
 	 */
 	
+	enum Temperature {
+		OVER_100//java Enum Enum(String name, int ordinal)
+	}
+	
 	private NcdcRecordParser Parser = new NcdcRecordParser();
 
 	@Override
@@ -22,6 +26,19 @@ public class MaxTemperatureMapper extends Mapper<LongWritable, Text, Text, IntWr
 		
 		Parser.parse(value);
 		if (Parser.isValidTemperature()) {
+			int airTemperature =Parser.getAirTemperature();
+			if (airTemperature>300) {
+				/*
+				 * java System err
+				 * java PrintStream println()
+				*/
+				System.err.println("Temperature over 100 degrees for input:" +value);
+				//hadoop mapreduce TaskAttemptContext.getStatus()
+				context.setStatus("Detected possibly corrupt record: see logs.");
+				//hadoop mapreduce TaskAttemptContext.getCounter(String groupName,String counterName)
+				context.getCounter(Temperature.OVER_100);
+			}
+			//hadoop mapreduce TaskInputOutputContext.wirte(KEYOUT key,VALUEOUT value)
 			context.write(new Text(Parser.getYear()), new IntWritable(Parser.getAirTemperature()));
 		}
 	}
