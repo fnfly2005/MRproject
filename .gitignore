@@ -27,3 +27,4 @@ hs_err_pid*
 *.crc
 pom.xml
 .ipynb_checkpoints/*
+.DS_Store
